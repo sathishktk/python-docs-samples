@@ -46,7 +46,7 @@ def write_time_series(project_id):
     series = monitoring_v3.types.TimeSeries()
     series.metric.type = 'custom.googleapis.com/tkcustom-metric-python'
     series.resource.type = 'gce_instance'
-    series.resource.labels['instance_id'] = 'use your instanceid'
+    series.resource.labels['instance_id'] = 'your instance id'
     series.resource.labels['zone'] = 'your zone'
     point = series.points.add()
     point.value.double_value = RANDOM_FLOAT_NUM
@@ -127,5 +127,7 @@ if __name__ == '__main__':
         delete_metric_descriptor(args.metric_descriptor_name)
     
     if args.command == 'write-time-series':
+        print("10 seconds delay to write time series")
+        time.sleep(10)
         write_time_series(project_id())
     
